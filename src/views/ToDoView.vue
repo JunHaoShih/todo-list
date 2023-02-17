@@ -2,7 +2,8 @@
   <div id="todo-container" class="container mx-auto max-w-5xl">
     <MyHeader @applyInput="addTask"/>
     <MyList :tasks="tasks"/>
-    <MyFooter :finishedCount="doneTasks.length" :totalCount="tasks.length"/>
+    <MyFooter :finishedCount="doneTasks.length" :totalCount="tasks.length"
+    @applyRemove="removeCompleteTasks" @onIsCheckedChanged="checkAll"/>
   </div>
 </template>
 
@@ -37,6 +38,20 @@ export default class ToDoView extends Vue {
       taskName: task,
       isDone: false,
     });
+  }
+
+  removeCompleteTasks() {
+    const checkedTasks = this.tasks.filter((task) => !task.isDone);
+    if (window.confirm(`Are you sure you want to delete ${checkedTasks.length}`)) {
+      this.tasks = checkedTasks;
+    }
+  }
+
+  checkAll(checkState: boolean): void {
+    // if (checkState === false)
+    for (let i = 0; i < this.tasks.length; i += 1) {
+      this.tasks[i].isDone = checkState;
+    }
   }
 }
 </script>
