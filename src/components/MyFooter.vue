@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Emit, Watch } from 'vue-property-decorator';
+import { Emit } from 'vue-property-decorator';
 
 @Options({
   props: {
