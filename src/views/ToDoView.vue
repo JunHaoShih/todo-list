@@ -13,6 +13,7 @@ import MyHeader from '@/components/MyHeader.vue'; // @ is an alias to /src
 import MyFooter from '@/components/MyFooter.vue';
 import MyList from '@/components/MyList.vue';
 import Task from '@/components/task';
+import { Watch } from 'vue-property-decorator';
 
 @Options({
   components: {
@@ -27,6 +28,13 @@ export default class ToDoView extends Vue {
 
   counter = 0;
 
+  created(): void {
+    const localTasks: string | null = localStorage.getItem('todoTasks');
+    if (localTasks) {
+      this.tasks = JSON.parse(localTasks!);
+    }
+  }
+
   get doneTasks(): Task[] {
     return this.tasks.filter((task) => task.isDone);
   }
@@ -38,6 +46,11 @@ export default class ToDoView extends Vue {
       taskName: task,
       isDone: false,
     });
+  }
+
+  @Watch('tasks', { deep: true })
+  onTasksChanged(newTasks: Task[], oldTasks: Task[]) {
+    localStorage.setItem('todoTasks', JSON.stringify(this.tasks));
   }
 
   removeCompleteTasks() {
