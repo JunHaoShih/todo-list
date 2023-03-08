@@ -11,8 +11,8 @@
         bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600
         dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
     </label>
-    完成 <span class="hover:underline text-green-600">{{ finishedCount }}</span> 項
-    / 共 <span class="hover:underline text-red-600">{{ totalCount }}</span> 項
+    完成 <span class="hover:underline text-green-600">{{ todoListStore.finishedCount }}</span> 項
+    / 共 <span class="hover:underline text-red-600">{{ todoListStore.totalCount }}</span> 項
   </span>
   <button type="button" class="text-white
     bg-red-700 hover:bg-red-800 focus:outline-none
@@ -27,6 +27,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Emit } from 'vue-property-decorator';
+import TodoListStore from '@/store/tasks';
 
 @Options({
   props: {
@@ -35,36 +36,23 @@ import { Emit } from 'vue-property-decorator';
   },
 })
 export default class MyFooter extends Vue {
-  finishedCount!: number
-
-  totalCount!: number
-
   isChecked = false;
 
-  onRemoveClicked(event: MouseEvent) {
-    this.applyRemove();
-  }
+  todoListStore = TodoListStore();
 
-  @Emit()
-  applyRemove(): number {
-    return this.finishedCount;
+  onRemoveClicked(event: MouseEvent) {
+    this.todoListStore.removeCompleteTasks();
   }
 
   get isAllChecked(): boolean {
-    this.isChecked = this.totalCount === this.finishedCount && this.totalCount > 0;
-    return this.isChecked;
+    return this.todoListStore.isAllChecked;
   }
 
   set isAllChecked(checkState: boolean) {
     this.isChecked = checkState;
-    if (checkState === true || this.totalCount === this.finishedCount) {
-      this.onIsCheckedChanged();
+    if (checkState === true || this.todoListStore.totalCount === this.todoListStore.finishedCount) {
+      this.todoListStore.setAllTasksState(checkState);
     }
-  }
-
-  @Emit()
-  onIsCheckedChanged(): boolean {
-    return this.isChecked;
   }
 }
 </script>

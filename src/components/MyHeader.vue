@@ -24,25 +24,18 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Emit } from 'vue-property-decorator';
+import TodoListStore from '@/store/tasks';
 
 @Options({})
 export default class MyHeader extends Vue {
-  msg!: string
+  todoListStore = TodoListStore();
 
   // You have to assign value to inputTask, or it will not be reactive
   inputTask = '';
 
   submitTask(event: KeyboardEvent): void {
-    if (this.inputTask) {
-      this.applyInput();
-    }
+    this.todoListStore.addTask(this.inputTask);
     this.inputTask = '';
-  }
-
-  @Emit()
-  applyInput(): string {
-    return this.inputTask;
   }
 }
 </script>

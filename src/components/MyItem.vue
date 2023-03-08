@@ -20,27 +20,25 @@
 </template>
 
 <script lang="ts">
+import { PropType } from 'vue';
 import { Options, Vue } from 'vue-class-component';
-import { Emit } from 'vue-property-decorator';
-import Task from './task';
+import TodoListStore from '@/store/tasks';
+import { Task } from '@/store/tasks/task-model';
 
 @Options({
   props: {
-    task: Task,
+    task: Object as PropType<Task>,
   },
 })
 export default class MyItem extends Vue {
   task!: Task
 
+  todoListStore = TodoListStore();
+
   onRemoveClicked(event: MouseEvent) {
     if (window.confirm(`Are you sure you want to delete ${this.task.taskName} ?`)) {
-      this.sendBackId();
+      this.todoListStore.removeTask(this.task.id);
     }
-  }
-
-  @Emit()
-  sendBackId(): number {
-    return this.task.id;
   }
 }
 </script>
