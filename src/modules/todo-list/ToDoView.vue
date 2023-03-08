@@ -8,12 +8,12 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import MyHeader from '@/components/MyHeader.vue'; // @ is an alias to /src
-import MyFooter from '@/components/MyFooter.vue';
-import MyList from '@/components/MyList.vue';
-import TodoListStore from '@/store/tasks';
 import { Watch } from 'vue-property-decorator';
-import { Task } from '@/store/tasks/task-model';
+import MyHeader from '@/modules/todo-list/components/MyHeader.vue';
+import MyFooter from '@/modules/todo-list/components/MyFooter.vue';
+import MyList from '@/modules/todo-list/components/MyList.vue';
+import TodoListStore from '@/modules/todo-list/stores/index';
+import { Task } from '@/modules/todo-list/stores/task-model';
 
 @Options({
   components: {

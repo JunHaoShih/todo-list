@@ -26,8 +26,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Emit } from 'vue-property-decorator';
-import TodoListStore from '@/store/tasks';
+import TodoListStore from '@/modules/todo-list/stores/index';
 
 @Options({
   props: {

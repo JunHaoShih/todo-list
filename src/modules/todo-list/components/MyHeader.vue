@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import TodoListStore from '@/store/tasks';
+import TodoListStore from '@/modules/todo-list/stores/index';
 
 @Options({})
 export default class MyHeader extends Vue {

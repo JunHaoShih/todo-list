@@ -22,8 +22,8 @@
 <script lang="ts">
 import { PropType } from 'vue';
 import { Options, Vue } from 'vue-class-component';
-import TodoListStore from '@/store/tasks';
-import { Task } from '@/store/tasks/task-model';
+import TodoListStore from '@/modules/todo-list/stores/index';
+import { Task } from '@/modules/todo-list/stores/task-model';
 
 @Options({
   props: {
