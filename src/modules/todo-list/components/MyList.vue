@@ -1,5 +1,7 @@
 <template>
-  <MyItem v-for="task in todoListStore.tasks" :key="task" :task="task"></MyItem>
+  <div class="h-auto max-h-[70%] overflow-y-auto">
+    <MyItem v-for="task in todoListStore.tasks" :key="task" :task="task"></MyItem>
+  </div>
 </template>
 
 <script lang="ts">

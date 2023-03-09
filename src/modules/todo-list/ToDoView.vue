@@ -1,5 +1,5 @@
 <template>
-  <div id="todo-container" class="container mx-auto max-w-5xl">
+  <div id="todo-container" class="container mx-auto max-w-5xl h-[93%]">
     <MyHeader/>
     <MyList/>
     <MyFooter/>
