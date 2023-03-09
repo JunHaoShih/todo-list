@@ -1,7 +1,7 @@
 <template>
   <div class="mb-6">
     <label for="task" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-      Task
+      <div class="text-lg font-bold">Task</div>
       <input id="task" type="text"
         class="block w-full p-4
         text-gray-900 border

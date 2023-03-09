@@ -17,7 +17,7 @@ const TodoListStore = defineStore('todos', {
       return this.totalCount === this.finishedCount && this.totalCount > 0;
     },
     maxId(state): number {
-      return Math.max(...state.tasks.map((task) => task.id));
+      return state.tasks.length ? Math.max(...state.tasks.map((task) => task.id)) : 0;
     },
   },
   actions: {
